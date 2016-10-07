@@ -11,15 +11,15 @@ class CBLed
     int blinkDelay;
     unsigned long lastFadeTime;
     unsigned long lastBlinkTime;
-    bool isFading;
     bool fadingUp;
-    bool isBlinking;
     void (*pCallback)();
     void set(int value);
     void setFade(int value);
   public:
     int pin;
     int state;
+    bool isFading;
+    bool isBlinking;
     void on();
     void off();
     void blink(int delay);

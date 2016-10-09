@@ -33,7 +33,7 @@ void CBLed::blink(int delay)
   blinkDelay = delay;
 }
 
-void CBLed::fade(int value){
+void CBLed::setIntensity(int value){
   isFading = false;
   isBlinking = false;  
   CBLed::setFade(value);

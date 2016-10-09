@@ -23,7 +23,7 @@ class CBLed
     void on();
     void off();
     void blink(int delay);
-    void fade(int value);
+    void setIntensity(int value);
     void doWork();
     void fadeTo(int value, int speed, void (*pCallbackFunction)());
     void fadeTo(int value, int speed);    

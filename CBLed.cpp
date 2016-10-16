@@ -8,7 +8,7 @@ CBLed::CBLed(int PIN)
   pin = PIN;
   pinMode(pin, OUTPUT);
   state = LOW;
-  currentValue = 0;
+  intensity = 0;
 }
 
 void CBLed::on()
@@ -46,16 +46,16 @@ void CBLed::set(int value)
   digitalWrite(pin, value);
   state = value;
   if (value == LOW){
-    currentValue = 0;
+    intensity = 0;
   }
   else{
-    currentValue = 255;
+    intensity = 255;
   }
 }
 
 void CBLed::setFade(int value){
   analogWrite(pin, value);
-  currentValue = value;
+  intensity = value;
 }
 
 void CBLed::fadeTo(int value, int speed, void (*pCallbackFunction)()){
@@ -63,7 +63,7 @@ void CBLed::fadeTo(int value, int speed, void (*pCallbackFunction)()){
   isFading = true;
   pCallback = pCallbackFunction;
   targetValue = value;
-  fadingUp = (currentValue < targetValue);
+  fadingUp = (intensity < targetValue);
   lastFadeTime = millis();
   fadeSpeed = speed;
 }
@@ -73,7 +73,7 @@ void CBLed::fadeTo(int value, int speed){
   isFading = true;
   pCallback = NULL;
   targetValue = value;
-  fadingUp = (currentValue < targetValue);
+  fadingUp = (intensity < targetValue);
   lastFadeTime = millis();
   fadeSpeed = speed;  
 }
@@ -82,9 +82,9 @@ void CBLed::doWork()
 {
   if (isFading){
     if (fadingUp){
-      if ((millis() - lastFadeTime) > 40){
-        if (currentValue < targetValue){
-          int nextValue = currentValue + fadeSpeed;
+      if ((millis() - lastFadeTime) > 80){
+        if (intensity < targetValue){
+          int nextValue = intensity + fadeSpeed;
           if (nextValue > targetValue){
             nextValue = targetValue;
           }
@@ -100,9 +100,9 @@ void CBLed::doWork()
       }
     }
     else{
-      if ((millis() - lastFadeTime) > 40){
-        if (currentValue > targetValue){
-          int nextValue = currentValue - fadeSpeed;
+      if ((millis() - lastFadeTime) > 80){
+        if (intensity > targetValue){
+          int nextValue = intensity - fadeSpeed;
           if (nextValue < targetValue){
             nextValue = targetValue;
           }

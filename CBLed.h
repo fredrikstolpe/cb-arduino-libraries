@@ -5,7 +5,6 @@
 class CBLed
 {
   private:
-    int currentValue;
     int targetValue;
     int fadeSpeed;
     int blinkDelay;
@@ -18,6 +17,7 @@ class CBLed
   public:
     int pin;
     int state;
+    int intensity;
     bool isFading;
     bool isBlinking;
     void on();

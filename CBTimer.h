@@ -11,6 +11,7 @@ class CBTimer
   public:
     bool isRunning;
     void setTimeout(int delay, void (*pCallbackFunction)());
+    void clear();
     void doWork();
     CBTimer();
 };

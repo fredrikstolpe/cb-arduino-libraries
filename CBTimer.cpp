@@ -13,6 +13,11 @@ void CBTimer::setTimeout(int delay, void (*pCallbackFunction)())
   startTime = millis();
 }
 
+void CBTimer::clear()
+{
+  isRunning = false;
+}
+
 void CBTimer::doWork()
 {
   if (isRunning){
